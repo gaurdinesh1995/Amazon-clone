@@ -1,16 +1,22 @@
+import React, {useState, useCallback} from 'react';
 import {
   View,
-  Text,
-  StyleSheet,
-  FlatList,
   Image,
+  FlatList,
+  StyleSheet,
   useWindowDimensions,
 } from 'react-native';
-import React from 'react';
 
-const ImageCarousal = ({images}: {images: [string]}) => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+const ImageCarousel = ({images}: {images: string[]}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const windowWidth = useWindowDimensions().width;
+
+  const onFlatlistUpdate = useCallback(({viewableItems}) => {
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index || 0);
+    }
+    console.log(viewableItems);
+  }, []);
 
   return (
     <View style={styles.root}>
@@ -28,17 +34,19 @@ const ImageCarousal = ({images}: {images: [string]}) => {
         snapToAlignment={'center'}
         decelerationRate={'fast'}
         viewabilityConfig={{
-          viewAreaCoveragePercentThrashold: 50,
-          minimumViewTime: 300,
+          viewAreaCoveragePercentThreshold: 50,
         }}
+        onViewableItemsChanged={onFlatlistUpdate}
       />
 
-      <View style={styles.dotContainer}>
+      <View style={styles.dots}>
         {images.map((image, index) => (
           <View
             style={[
               styles.dot,
-              {backgroundColor: index === activeIndex ? '#c9c9c9' : '#ededed'},
+              {
+                backgroundColor: index === activeIndex ? '#c9c9c9' : '#ededed',
+              },
             ]}
           />
         ))}
@@ -47,8 +55,6 @@ const ImageCarousal = ({images}: {images: [string]}) => {
   );
 };
 
-export default ImageCarousal;
-
 const styles = StyleSheet.create({
   root: {},
   image: {
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
     height: 250,
     resizeMode: 'contain',
   },
-  dotContainer: {
+  dots: {
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -65,8 +71,10 @@ const styles = StyleSheet.create({
     height: 10,
     borderRadius: 25,
     borderWidth: 1,
-    borderColor: '#ededed',
-    backgroundColor: '#e9e9e9',
+    backgroundColor: '#ededed',
+    borderColor: '#c9c9c9',
     margin: 5,
   },
 });
+
+export default ImageCarousel;

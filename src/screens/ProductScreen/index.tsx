@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import {Picker} from '@react-native-picker/picker';
 import styles from './ styles';
@@ -11,10 +11,10 @@ const ProductScreen = () => {
   const [selectedOption, setSelectedOption] = React.useState('');
   const [quantity, setQuantity] = React.useState(1);
   return (
-    <View style={styles.root}>
+    <ScrollView style={styles.root} showsVerticalScrollIndicator={false}>
       <Text style={styles.title}>{product.title}</Text>
       {/* Image carouser */}
- <ImageCarousal images={product.images}/>
+      <ImageCarousal images={product.images} />
       {/* Option selector */}
 
       <Picker
@@ -45,6 +45,7 @@ const ProductScreen = () => {
         onPress={() => {
           console.warn('Add to cart');
         }}
+        containerStyles={{backgroundColor: '#e3c905'}}
       />
       <Button
         text="Buy Now"
@@ -52,7 +53,7 @@ const ProductScreen = () => {
           console.warn('Buy now');
         }}
       />
-    </View>
+    </ScrollView>
   );
 };
 
