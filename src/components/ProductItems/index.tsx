@@ -1,6 +1,7 @@
-import {View, StyleSheet, Image, Text} from 'react-native';
+import {View, StyleSheet, Image, Text, Pressable, Alert} from 'react-native';
 import React from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {useNavigation} from '@react-navigation/native';
 
 interface ProductItemProps {
   item: {
@@ -15,8 +16,13 @@ interface ProductItemProps {
 }
 
 const ProductItem = ({item}: ProductItemProps) => {
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('ProductScreen',{id:item.id});
+  };
   return (
-    <View style={styles.root}>
+    <Pressable onPress={onPress} style={styles.root}>
       <Image
         source={{
           uri: item.image,
@@ -29,15 +35,15 @@ const ProductItem = ({item}: ProductItemProps) => {
         </Text>
         {/* Ratings */}
         <View style={styles.ratingContainer}>
-       {[0,0,0,0,0].map((el,i)=>
-        <FontAwesome
-        key={`${item.id}-${i}`}
-        style={styles.star}
-        name={i < Math.floor(item.avgRating) ? 'star': 'star-o'}
-        size={18}
-        color={'#e47911'}
-      />
-       )}
+          {[0, 0, 0, 0, 0].map((el, i) => (
+            <FontAwesome
+              key={`${item.id}-${i}`}
+              style={styles.star}
+              name={i < Math.floor(item.avgRating) ? 'star' : 'star-o'}
+              size={18}
+              color={'#e47911'}
+            />
+          ))}
 
           <Text>{item.avgRating}</Text>
         </View>
@@ -49,7 +55,7 @@ const ProductItem = ({item}: ProductItemProps) => {
           )}
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
