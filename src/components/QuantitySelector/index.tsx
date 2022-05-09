@@ -1,29 +1,29 @@
-import {View, Text, StyleSheet, Pressable} from 'react-native';
 import React from 'react';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 
-const QuantitySelector = ({quantity, setQuantity}:any) => {
+const QuantitySelector = ({quantity, setQuanity}: any) => {
   const onMinus = () => {
-    setQuantity(Math.max(0,quantity - 1));
+    setQuanity(Math.max(0, quantity - 1));
   };
 
   const onPlus = () => {
-    setQuantity(quantity + 1);
+    setQuanity(quantity + 1);
   };
+
   return (
     <View style={styles.root}>
       <Pressable onPress={onMinus} style={styles.button}>
-        <Text style={styles.buttonText}>-</Text>
+        <Text style={styles.butonText}>-</Text>
       </Pressable>
 
       <Text style={styles.quantity}>{quantity}</Text>
+
       <Pressable onPress={onPlus} style={styles.button}>
-        <Text style={styles.buttonText}>+</Text>
+        <Text style={styles.butonText}>+</Text>
       </Pressable>
     </View>
   );
 };
-
-export default QuantitySelector;
 
 const styles = StyleSheet.create({
   root: {
@@ -35,16 +35,18 @@ const styles = StyleSheet.create({
     width: 130,
   },
   button: {
-    width: 25,
-    height: 25,
+    width: 35,
+    height: 35,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#c2c2c2',
+    backgroundColor: '#d1d1d1',
   },
-  buttonText: {
+  butonText: {
     fontSize: 18,
   },
   quantity: {
     color: '#007eb9',
   },
 });
+
+export default QuantitySelector;

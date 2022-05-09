@@ -63,6 +63,10 @@ const CartProductItem = ({CartItem}: CartProductItemProps) => {
       </View>
       <View style={styles.quantityContainer}>
       <QuantitySelector quantity={quantity} setQuanity={setQuantity} />
+      {/* <QuantitySelector
+          quantity={cartProduct.quantity}
+          setQuantity={updateQuantity}
+        /> */}
       </View>
       
     </View>
