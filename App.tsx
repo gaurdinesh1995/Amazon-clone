@@ -3,6 +3,13 @@ import React from 'react';
 import {StatusBar, useColorScheme, View,SafeAreaView} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Router from './src/router';
+
+//AWS Amplify imports
+import { Amplify } from 'aws-amplify';
+import {withAuthenticator} from 'aws-amplify-react-native';
+import awsconfig from './src/aws-exports'
+Amplify.configure(awsconfig)
+
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -18,4 +25,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withAuthenticator(App);
