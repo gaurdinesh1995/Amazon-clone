@@ -2,14 +2,13 @@ import {View, StyleSheet, Image, Text, FlatList} from 'react-native';
 import React from 'react';
 import ProductItem from '../../components/ProductItems';
 import products from '../../data/products';
-const HomeScreen = () => {
+const HomeScreen = ({searchValue}: {searchValue: string}) => {
   return (
     <View style={styles.container}>
       {/* Render Product Component */}
-
       <FlatList
         data={products}
-        renderItem={({item}) => <ProductItem item={item}  />}
+        renderItem={({item}) => <ProductItem item={item} />}
         showsVerticalScrollIndicator={false}
       />
     </View>

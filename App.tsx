@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import {StatusBar, useColorScheme, View} from 'react-native';
+import {StatusBar, useColorScheme, View,SafeAreaView} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Router from './src/router';
 const App = () => {
